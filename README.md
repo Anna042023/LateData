@@ -28,9 +28,9 @@ LateData separates query-visible state into three parts:
 - **Open** — recent mutable state, read exactly;
 - **Sealed** — durable but uncompacted late-data state, selectively read.
 
-For each supported query class, a metadata-only certification overlay is maintained over the shared Sealed microchunks. Finalized segments expose a common certificate charge $lambda_c$, while the current residual tail keeps its exact certificate.
+For each supported query class, a metadata-only certification overlay is maintained over the shared Sealed microchunks. Finalized segments expose a common certificate charge $\lambda_c$, while the current residual tail keeps its exact certificate.
 
-For a query with error budget $epsilon_q$, the planner:
+For a query with error budget $\epsilon_q$, the planner:
 
 1. pins a consistent ownership snapshot;
 2. resolves the query to a certification class;
