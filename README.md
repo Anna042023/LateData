@@ -15,7 +15,7 @@ LateData studies **selective access to durable but uncompacted late data** in ti
    Late-data microchunks remain physically shared, while lightweight per-class overlays maintain event-time boundaries, byte counters, references, and contribution certificates. Mass-adaptive packing separates workload-dependent semantic slack from bounded uniformization slack, and the unfinished residual tail retains an exact certificate.
 
 3. **Exact structured planning over the certified surrogate.**  
-   Uniform finalized-segment charges are characterized as the condition that enables an exact cost-only `k`-cheapest rule for every error budget and byte-cost vector. The same ordered representation also supports an integral interval formulation for groups of same-class temporal queries.
+   Uniform finalized-segment charges are characterized as the condition that enables an exact cost-only $k$-cheapest rule for every error budget and byte-cost vector. The same ordered representation also supports an integral interval formulation for groups of same-class temporal queries.
 
 4. **Watermark-local online maintenance.**  
    Under bounded lateness and a fixed catalog, arrival-driven mutable certification state depends on the lateness horizon and catalog size rather than total archive length. Sealing, selection, and compaction ownership are kept separate so that query-time selective reads do not modify storage ownership.
