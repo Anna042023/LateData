@@ -1,4 +1,4 @@
-# LateData
+# ⏱️ LateData
 
 Code and data release for:
 
@@ -6,7 +6,7 @@ Code and data release for:
 
 LateData studies **selective access to durable but uncompacted late data** in time-series databases. Instead of reading the entire Sealed backlog, the system determines which late-data regions must be read so that a temporal aggregate query satisfies a deterministic error budget while minimizing physical read bytes.
 
-## Main Contributions
+## 🌟 Main Contributions
 
 1. **Minimum-byte late-state read formulation.**  
    We formulate selective access to Sealed, uncompacted state under pinned snapshot ownership and deterministic aggregate-error contracts. Direct query-specific planning is weakly NP-hard, motivating a reusable metadata-based representation rather than a per-query knapsack solve.
@@ -20,7 +20,7 @@ LateData studies **selective access to durable but uncompacted late data** in ti
 4. **Watermark-local online maintenance.**  
    Under bounded lateness and a fixed catalog, arrival-driven mutable certification state depends on the lateness horizon and catalog size rather than total archive length. Sealing, selection, and compaction ownership are kept separate so that query-time selective reads do not modify storage ownership.
 
-## Method Overview
+## 🔍 Method Overview
 
 LateData separates query-visible state into three parts:
 
@@ -42,7 +42,7 @@ For a query with error budget $\epsilon_q$, the planner:
 
 The result satisfies the deterministic omission-error certificate of the selected plan.
 
-## Repository Structure
+## 📁 Repository Structure
 
 This public repository intentionally keeps only the code, scripts, and reported-result data required for inspecting the released artifact.
 
@@ -63,19 +63,19 @@ LateData/
         └── ...
 ```
 
-### `code/`
+### 💻 `code/`
 
 `balanced_cert_reference.py` is a compact reference implementation of the **uniform-charge single-query certified planner**. It explicitly considers both residual-tail states and returns the minimum-byte feasible plan.
 
-### `scripts/`
+### 🛠️ `scripts/`
 
 `verify_reported_results.py` checks the numerical invariants represented by the released CSV summaries, including contract satisfaction, the balance envelope, physical byte ratios, execution speedup ranges, baseline correctness, and the mutable-state bound.
 
-### `data/`
+### 📊 `data/`
 
 `data/reported/` contains machine-readable summaries of the experimental results reported in the paper. These files are intended for result inspection and consistency checking.
 
-## Quick Start
+## 🚀 Quick Start
 
 Clone the repository and move to its root directory:
 
@@ -108,7 +108,7 @@ A successful check prints:
 reported-result consistency: PASS
 ```
 
-## Experimental Coverage
+## 🧪 Experimental Coverage
 
 The paper evaluates five complementary questions:
 
@@ -122,7 +122,7 @@ The paper evaluates five complementary questions:
 
 The controlled evaluation uses Sensor54-like and Taxi-like workloads, while public time-series traces are used to test heterogeneous real-valued contributions and execution transfer. Physical execution is evaluated with SQLite and QuestDB.
 
-## Baselines
+## ⚖️ Baselines
 
 The evaluation compares the balanced certification design with component-matched alternatives:
 
