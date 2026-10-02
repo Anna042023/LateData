@@ -28,9 +28,9 @@ LateData separates query-visible state into three parts:
 - **Open** — recent mutable state, read exactly;
 - **Sealed** — durable but uncompacted late-data state, selectively read.
 
-For each supported query class, a metadata-only certification overlay is maintained over the shared Sealed microchunks. Finalized segments expose a common certificate charge `lambda_c`, while the current residual tail keeps its exact certificate.
+For each supported query class, a metadata-only certification overlay is maintained over the shared Sealed microchunks. Finalized segments expose a common certificate charge $lambda_c$, while the current residual tail keeps its exact certificate.
 
-For a query with error budget `epsilon_q`, the planner:
+For a query with error budget $epsilon_q$, the planner:
 
 1. pins a consistent ownership snapshot;
 2. resolves the query to a certification class;
@@ -75,16 +75,6 @@ LateData/
 
 `data/reported/` contains machine-readable summaries of the experimental results reported in the paper. These files are intended for result inspection and consistency checking.
 
-## Requirements
-
-The included reference planner and result checker use only the Python standard library.
-
-- Python **3.10+** recommended
-- No GPU required
-- No third-party Python packages are required for the two released scripts
-
-The full experimental study described in the paper additionally used SQLite and QuestDB execution paths; those systems are not required to run the compact planner or the released result checker.
-
 ## Quick Start
 
 Clone the repository and move to its root directory:
@@ -118,38 +108,6 @@ A successful check prints:
 reported-result consistency: PASS
 ```
 
-## Reference Planner
-
-The main entry point is:
-
-```python
-plan_uniform_charge(
-    byte_costs,
-    lambda_charge,
-    epsilon,
-    tail_certificate=0.0,
-    tail_cost=0.0,
-)
-```
-
-Example:
-
-```python
-from code.balanced_cert_reference import plan_uniform_charge
-
-plan = plan_uniform_charge(
-    byte_costs=[9, 2, 5, 1],
-    lambda_charge=3,
-    epsilon=6,
-)
-
-print(plan.read_indices)
-print(plan.cost)
-print(plan.certified_omitted_charge)
-```
-
-The planner first conditions on whether the residual tail is read. For each feasible tail state, the error budget determines the maximum number of uniform-charge finalized segments that may remain unread. The planner then reads the required number of cheapest segments and returns the lower-cost feasible alternative.
-
 ## Experimental Coverage
 
 The paper evaluates five complementary questions:
@@ -164,18 +122,6 @@ The paper evaluates five complementary questions:
 
 The controlled evaluation uses Sensor54-like and Taxi-like workloads, while public time-series traces are used to test heterogeneous real-valued contributions and execution transfer. Physical execution is evaluated with SQLite and QuestDB.
 
-### Reported Results
-
-The released tables capture the main reported measurements:
-
-- **440/440** controlled soundness queries satisfy their requested error contracts.
-- **5,400** balance instances remain inside the analytical envelope.
-- On **SQLite**, refined catalogs reduce selected late-data bytes to **0.51–0.69×** FullLateRead and achieve median execution speedups of **1.45–1.91×**.
-- On controlled **QuestDB 10.0.1** replay, selected bytes are **0.54–0.70×** FullLateRead with median server speedups of **1.26–1.69×**.
-- On the public **Mauna Loa CO2** replay, all 12 queries satisfy their contracts, with selected-byte ratios of **0.50–0.70×** and median server speedups of **1.20–1.41×**.
-
-These execution results characterize the tested settings; they should not be interpreted as universal production-latency guarantees.
-
 ## Baselines
 
 The evaluation compares the balanced certification design with component-matched alternatives:
@@ -189,30 +135,3 @@ The evaluation compares the balanced certification design with component-matched
 - **Balanced-Cert** — the proposed balanced certification representation.
 
 The reported-result checker verifies that the exact/certified methods satisfy their contracts in the released baseline table, while `NoSealedRead` does not.
-
-## Artifact Scope
-
-This repository is a **compact code-and-data release**, not a complete reconstruction of every historical experimental driver or raw event-level execution log.
-
-Specifically:
-
-- `code/balanced_cert_reference.py` demonstrates the proved uniform-charge planning rule;
-- `data/reported/` preserves manuscript-facing experimental summaries;
-- `scripts/verify_reported_results.py` checks directly testable numerical invariants from those summaries.
-
-The result checker is therefore a consistency check over the released data, not a substitute for the paper's formal proofs or a claim that every database experiment can be rerun from raw logs using this compact repository alone.
-
-## Citation
-
-If you use this work, please cite:
-
-```bibtex
-@article{wang2027latedata,
-  title   = {Which Late Data Must Be Read? Error-Bounded Aggregate Query Processing in Time-Series Databases},
-  author  = {Wang, Anna and Zhang, Chao and Li, Ling and Li, Wentao and Li, Deyu},
-  journal = {Proceedings of the VLDB Endowment},
-  volume  = {20},
-  number  = {1},
-  year    = {2027}
-}
-```
