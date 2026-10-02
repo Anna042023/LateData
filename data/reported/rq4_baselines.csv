@@ -1,0 +1,8 @@
+method,bytes_sensor54,bytes_taxi,plan_ms_sensor54,plan_ms_taxi,satisfaction_percent,representation
+FullLateRead,1.000,1.000,,,100,full sealed state
+Oracle,0.530,0.516,1.77,1.71,100,per-query exact
+NoBalance,0.530,0.537,1.75,1.72,100,heterogeneous
+Balanced-Cert,0.688,0.688,0.020,0.020,100,uniform lambda_c
+FixedRows,0.688,0.688,0.005,0.005,100,rows max charge
+FixedTime,0.673,0.720,0.006,0.006,100,time max charge
+NoSealedRead,0.000,0.000,0.000,0.000,0,none

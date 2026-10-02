@@ -1,0 +1,4 @@
+delta,infeasibility_percent_min,infeasibility_percent_max,p90_repair_cost_ratio_min,p90_repair_cost_ratio_max
+0.00,0.0,0.0,1.00,1.00
+0.05,6.7,12.9,,
+0.80,30.8,40.4,1.29,1.49

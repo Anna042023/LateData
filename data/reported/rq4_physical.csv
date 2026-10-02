@@ -1,0 +1,17 @@
+engine,workload,epsilon_over_U,bytes_ratio,server_or_exec_speedup,client_speedup,contracts_satisfied
+SQLite,Sensor54,0.4,0.691,1.45,,yes
+SQLite,Sensor54,0.6,0.510,1.90,,yes
+SQLite,Taxi-like,0.4,0.690,1.48,,yes
+SQLite,Taxi-like,0.6,0.530,1.91,,yes
+QuestDB,Sensor54,0.4,0.700,1.29,1.08,yes
+QuestDB,Sensor54,0.6,0.540,1.69,1.21,yes
+QuestDB,Taxi-like,0.4,0.700,1.26,0.98,yes
+QuestDB,Taxi-like,0.6,0.540,1.48,1.05,yes
+QuestDB,CO2 trace,0.4,0.640,1.19,1.03,yes
+QuestDB,CO2 trace,0.6,0.450,1.22,1.02,yes
+QuestDB,El Nino trace,0.4,0.700,1.06,1.02,yes
+QuestDB,El Nino trace,0.6,0.540,1.12,1.01,yes
+QuestDB,Nile trace,0.4,0.740,1.08,0.98,yes
+QuestDB,Nile trace,0.6,0.610,1.14,0.99,yes
+QuestDB,Sunspots trace,0.4,0.910,0.98,1.00,yes
+QuestDB,Sunspots trace,0.6,0.860,1.04,0.98,yes
